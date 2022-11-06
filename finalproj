@@ -1,0 +1,87 @@
+var lives = 3;
+var exp = 50;
+var booster = 0;
+
+//Buttons
+onEvent("button-start", "click", function() {
+  setScreen("gameplay-screen");
+  reset();
+});
+onEvent("button-shop", "click", function() {
+  setScreen("shop-screen");
+});
+onEvent("button-exitshop", "click", function() {
+  setScreen("gameplay-screen");
+});
+onEvent("button-playagain", "click", function( ) {
+  setScreen("start-screen");
+});
+onEvent("button-tryagain", "click", function( ) {
+  setScreen("start-screen");
+});
+
+//Gameplay
+onEvent("gameplay-bg", "click", function() {
+  exp = exp - 50;
+  lives = lives - 1;
+  checkStatus();
+  setText("count-exp", exp);
+  setText("count-lives", lives);
+});
+onEvent("paper-ball1", "click", function() {
+  setPosition("paper-ball1", randomNumber(1, 250), randomNumber(250, 400));
+  checkStatus();
+});
+onEvent("paper-ball2", "click", function() {
+  setPosition("paper-ball2", randomNumber(1, 250), randomNumber(250, 400));
+  checkStatus();
+});
+onEvent("paper-ball3", "click", function() {
+  setPosition("paper-ball3", randomNumber(1, 250), randomNumber(250, 400));
+  checkStatus();
+});
+
+//Shop Boosters
+onEvent("booster", "click", function( ) {
+  booster = booster + 1;
+  lives = lives - 1;
+  setText("count-lives", lives);
+  showElement("text-boosteron");
+});
+
+//Functions
+function checkStatus() {
+  checkScore();
+  checkGameFinish();
+}
+function checkScore() {
+  if (booster > 0) {
+    exp = exp + 20;
+  } else {
+    exp = exp + 10;
+  }
+  setText("count-exp", exp);
+}
+function checkGameFinish() {
+  if (lives == 0) {
+    setScreen("end-screen");
+  } else if (exp >= 500) {
+    setScreen("finish-screen");
+  }
+}
+function reset() {
+  lives = 3;
+  exp = 50;
+  booster = 0;
+  setText("count-exp", exp);
+  setText("count-lives", lives);
+  hideElement("text-boosteron");
+}
+
+//Credit
+//Paper Ball: https://www.stickpng.com/img/miscellaneous/crumpled-paper/crumpled-paper-ball
+//EXP: https://dev.bukkit.org/projects/experiencewithdraw
+//Windows XP Background: https://www.atlasobscura.com/places/location-of-the-microsoft-windows-xp-wallpaper
+//Booster 1: https://minecraft.gamepedia.com/Bottle_o%27_Enchanting
+//Elmo: https://pngio.com/PNG/a45307-elmo-transparent-background.html
+//Cookie Monster: https://dlpng.com/png/503571
