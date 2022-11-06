@@ -1,0 +1,44 @@
+favoriteList = [];
+appendItem(favoriteList, "https://www.protexinvet.com/userfiles/image/cute-2500929_1920_(1).jpg");
+appendItem(favoriteList, "https://seonkyounglongest.com/wp-content/uploads/2017/12/Korean-Fried-Chicken-03.jpg");
+appendItem(favoriteList, "https://www.korea.net/upload/content/editImage/141223_chilsung_3.jpg");
+var current_index = 0;
+update_Screen();
+
+onEvent("button_last", "click", function() {
+  goLast();
+});
+onEvent("button_next", "click", function() {
+  goNext();
+});
+onEvent("button_add", "click", function() {
+  var newItem = getText("text_input");
+  setText("text_input", "");
+  insertItem(favoriteList, current_index, newItem);
+  update_Screen();
+});
+onEvent("screen1", "keydown", function(event) {
+  if (event.key == "Left") {
+    goLast();
+  } else if ((event.key == "Right")) {
+    goNext();
+  }
+});
+function goLast() {
+  current_index--;
+  if (current_index < 0) {
+    current_index = favoriteList.length - 1
+  }
+  update_Screen();
+}
+function goNext() {
+  current_index++;
+  if (current_index > favoriteList.length-1) {
+    current_index = 0;
+  }
+  update_Screen();
+}
+function update_Screen() {
+  setImageURL("myImage", favoriteList[current_index]);
+  setText("entry_count", (current_index+1 + " of ") + favoriteList.length);
+}
