@@ -1,0 +1,33 @@
+var score = 0;
+var lives = 3;
+
+onEvent("start_button", "click", function() {
+  setScreen("game_screen");
+});
+
+onEvent("cookie", "click", function() {
+  setPosition("cookie", randomNumber(50,280), randomNumber(50, 350));
+  score = score + 1;
+  setText("total_score", score);
+  if (score == 7)
+  {
+    setScreen("win_screen");
+  }
+});
+
+onEvent("background", "click", function() {
+  lives = lives - 1;
+  if (lives == 0) 
+  {
+    setScreen("lose_screen");
+  }
+  setText("number_lives", lives);
+});
+
+onEvent("playAgain_button", "click", function() {
+  setScreen("welcome_screen");
+});
+
+onEvent("tryAgain_button", "click", function() {
+  setScreen("welcome_screen");
+});
