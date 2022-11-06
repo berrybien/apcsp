@@ -1,0 +1,88 @@
+//Start Screen
+//A sound will play upon clicking start.
+onEvent("button_start", "click", function() {
+  console.log("Let's begin...");
+  setScreen("gameplay_1");
+  playSound("door_creak_closing.mp3", false);
+});
+
+//Gameplay Scene 1
+//If the player wishes to restart,
+//this button will take them to the start screen.
+onEvent("button_restart1", "click", function() {
+  console.log("Restarting the game...");
+  setScreen("screen_start");
+});
+//When you click any part of the screen except the wine bottle,
+//it will take you to gameover screen.
+onEvent("bg_1", "click", function() {
+  console.log("You failed...");
+  setScreen("gameover");
+});
+onEvent("fake_object1", "click", function(){
+console.log("That's the fake wine!");
+setScreen("gameover");
+});
+onEvent("box_big", "click", function(){
+console.log("It's a box!");
+setScreen("gameover");
+});
+onEvent("box_small", "click", function(){
+console.log("It's a box!");
+setScreen("gameover");
+});
+//If you successfully click the object,
+//it will take you to the next gameplay scene.
+//A door knob sound will play once.
+onEvent("object_1", "click", function() {
+  console.log("You found the wine bottle!");
+  setScreen("gameplay_2");
+  playSound("door_knob.mp3", false);
+});
+
+//Gameplay Scene 2
+//If the player wishes to restart,
+//this button will take them to the start screen.
+onEvent("button_restart2", "click", function() {
+  console.log("Restarting the game...");
+  setScreen("screen_start");
+});
+//When you click any part of the screen except the wine bottle,
+//it will take you to gameover screen.
+onEvent("bg_2", "click", function() {
+  console.log("You failed...");
+  setScreen("gameover");
+});
+onEvent("tool", "click", function(){
+console.log("That's not a key...!");
+setScreen("gameover");
+});
+onEvent("padlock", "click", function(){
+console.log("This is a padlock!");
+setScreen("gameover");
+});
+//If you successfully click the object,
+//it will take you to the gameplay complete.
+onEvent("object_2", "click", function(){
+console.log("You solved it...!");
+setScreen("gamesuccess");
+});
+
+//Game Complete Screen
+//When finished with the last gameplay,
+//player will be taken to this screen.
+onEvent("button_restart3", "click", function() {
+  console.log("Rebooting game...");
+  setScreen("screen_start");
+});
+
+//Game Over Screen
+//Any time you click the wrong object,
+//it will take you to this screen.
+onEvent("button_restart", "click", function(){
+console.log("Rebooting system...");
+setScreen("screen_start");
+});
+onEvent("text_input", "input", function() {
+  console.log("Player entered text: " + getText("text_input"));
+});
